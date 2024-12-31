@@ -6,8 +6,15 @@ class ControllerApplication extends F\ControllerBase
 {
     public function executeAction($action, $level, $parameters)
     {
+        // $level = access level:
+        // 0 - always available
+        // 1 - configuration must be OK, log in not required
+        // 2 - configuration must be OK and must be logged in
+
+        $controllerName = get_class($this);
         define("APP_LOG", new F\ModelLogger("application"));
         APP_LOG->writeMessage("------------------------------ Application start ------------------------------");
+        APP_LOG->writeMessage("Controller: '{$controllerName}'");
         APP_LOG->writeMessage("Action    : '{$action}'");
         APP_LOG->writeMessage("Level     : {$level}");
         APP_LOG->writeMessage("Parameters:");
