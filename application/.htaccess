@@ -1,0 +1,4 @@
+# Prevent loading in the browser
+<FilesMatch ".+\.(php)$">
+Deny from all
+</FilesMatch>
