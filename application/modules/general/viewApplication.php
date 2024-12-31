@@ -4,9 +4,12 @@
 
 class ViewApplication extends F\ViewPage
 {
-    public function __construct($pageName)
+    public function __construct($pageName, $pageData)
     {
-        $this->pageTitle = PAGE_TITLE;
+        $subTitle = (isset($pageData["sub_title"]) ? " - " . $pageData["sub_title"] : "");
+
+        $this->pageData = $pageData;
+        $this->pageTitle = PAGE_TITLE . $subTitle;
         $this->pageFile = "view{$pageName}.php";
         $this->styleSheets = [
             "application/styles/bootstrap.css",

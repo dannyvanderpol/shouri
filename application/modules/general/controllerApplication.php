@@ -26,15 +26,18 @@ class ControllerApplication extends F\ControllerBase
 
     protected function showWrongUri()
     {
-        return $this->showPage("WrongUri");
+        $pageData = [
+            "sub_title" => "Wrong URI"
+        ];
+        return $this->showPage("WrongUri", $pageData);
     }
 
-    private function showPage($pageName)
+    private function showPage($pageName, $pageData)
     {
         APP_LOG->writeMessage("Generate color theme");
         ModelColorTheme::generateTheme();
         APP_LOG->writeMessage("Create view for '{$pageName}'");
-        $view = new ViewApplication($pageName);
+        $view = new ViewApplication($pageName, $pageData);
         APP_LOG->writeMessage("Generate view");
         return $view->generateOutput();
     }
