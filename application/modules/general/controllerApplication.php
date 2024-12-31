@@ -20,6 +20,7 @@ class ControllerApplication extends F\ControllerBase
         APP_LOG->writeMessage("Parameters:");
         APP_LOG->writeDataArray($parameters);
 
+        APP_LOG->writeMessage("Execute action");
         return $this->$action($parameters);
     }
 
@@ -30,8 +31,11 @@ class ControllerApplication extends F\ControllerBase
 
     private function showPage($pageName)
     {
+        APP_LOG->writeMessage("Generate color theme");
         ModelColorTheme::generateTheme();
+        APP_LOG->writeMessage("Create view for '{$pageName}'");
         $view = new ViewApplication($pageName);
+        APP_LOG->writeMessage("Generate view");
         return $view->generateOutput();
     }
 }
