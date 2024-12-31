@@ -9,7 +9,8 @@ class ViewApplication extends F\ViewPage
         $this->pageTitle = PAGE_TITLE;
         $this->pageFile = "view{$pageName}.php";
         $this->styleSheets = [
-            "application/styles/bootstrap.css"
+            "application/styles/bootstrap.css",
+            "application/styles/shouri.css"
         ];
     }
 }

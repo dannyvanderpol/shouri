@@ -1,0 +1,3 @@
+/* HTML overrides */
+/* Font size must be defined in HTML tag because of the use of rem units */
+html        {font-size: 14px}
