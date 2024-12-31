@@ -1,6 +1,9 @@
 /* HTML overrides */
 /* Font size must be defined in HTML tag because of the use of rem units */
-html        {font-size: 14px}
+html            {font-size: 14px}
 
-.logo-img   {max-height: 36px; vertical-align: middle;}
-.logo-text  {font-size: 24px; vertical-align: middle;}
+.logo-img       {max-height: 36px; vertical-align: middle;}
+.logo-text      {font-size: 24px; vertical-align: middle;}
+
+/* Containers */
+.main-content   {min-height: 700px}

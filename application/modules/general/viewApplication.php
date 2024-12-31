@@ -22,7 +22,7 @@ class ViewApplication extends F\ViewPage
     {
         $output = "<body>\n";
         $output .= $this->getContentFromPageFile("viewHeader.php");
-        $output .= "<div class=\"{CONTAINER}\">\n";
+        $output .= "<div class=\"{CONTAINER} main-content\">\n";
         $output .= $this->getContentFromPageFile($this->pageFile);
         $output .= "</div>\n";
         $output .= $this->getContentFromPageFile("viewFooter.php");
