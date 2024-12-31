@@ -1,0 +1,5 @@
+# Python
+*.pyc
+
+# Test reports
+/unit_tests/test_reports/*
