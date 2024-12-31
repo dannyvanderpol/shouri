@@ -15,51 +15,19 @@ class TestWebAccess(TestSuiteBase):
 
         # All is forbidden
         expected_code = 403
+
         # The exceptions
 
-        # Index files
-        if file_path in ["index.php"]:
+        # Index file
+        if file_path == "index.php":
             expected_code = 200
-        if file_path in ["php_framework/index.php"]:
-            expected_code = 404
+
+        # Images
+        if file_path.startswith("application/images/") and file_path.endswith(".png"):
+            expected_code = 200
 
         # Style sheets and fonts
         if file_path.startswith("application/styles/") and file_path.endswith(".css"):
-            expected_code = 200
-        if file_path.startswith("application/styles/") and file_path.endswith(".ttf"):
-            expected_code = 200
-        if file_path.startswith("application/styles/") and file_path.endswith(".woff2"):
-            expected_code = 200
-
-        # JavaScript
-        if file_path.startswith("application/js/") and file_path.endswith(".js"):
-            expected_code = 200
-
-        # User manual
-        if file_path.startswith("user-manual/") and file_path.endswith(".html"):
-            expected_code = 200
-        if file_path.startswith("user-manual/") and file_path.endswith(".css"):
-            expected_code = 200
-        if file_path.startswith("user-manual/") and file_path.endswith(".ttf"):
-            expected_code = 200
-        if file_path.startswith("user-manual/") and file_path.endswith(".woff"):
-            expected_code = 200
-        if file_path.startswith("user-manual/") and file_path.endswith(".woff2"):
-            expected_code = 200
-        if file_path.startswith("user-manual/") and file_path.endswith(".eot"):
-            expected_code = 200
-        if file_path.startswith("user-manual/") and file_path.endswith(".js"):
-            expected_code = 200
-        if file_path.startswith("user-manual/") and file_path.endswith(".svg"):
-            expected_code = 200
-        if file_path.startswith("user-manual/") and file_path.endswith(".png"):
-            expected_code = 200
-
-        # Artifacts
-        if file_path.startswith("application/artifacts/") and file_path.endswith(".xlsx"):
-            expected_code = 200
-        # Static web page
-        if file_path.startswith("web/") and file_path.endswith(".html"):
             expected_code = 200
 
         self.log.debug(f"Check access for file: {file_path}")
