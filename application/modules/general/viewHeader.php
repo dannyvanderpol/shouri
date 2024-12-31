@@ -1,3 +1,6 @@
 <header class="{CONTAINER} clearfix theme-bg">
-<span class="float-start fs-5">{PAGE_TITLE}</span>
+<div class="float-start">
+<img class="logo-img mx-2" src="{LINK_ROOT}application/images/shouri-white.png" />
+<span class="logo-text">{PAGE_TITLE}</span>
+</div>
 </header>
