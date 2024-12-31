@@ -11,6 +11,7 @@ class ControllerApplication extends F\ControllerBase
 
     private function showPage($pageName)
     {
+        ModelColorTheme::generateTheme();
         $view = new ViewApplication($pageName);
         return $view->generateOutput();
     }
