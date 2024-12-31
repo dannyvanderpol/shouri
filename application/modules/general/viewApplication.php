@@ -25,6 +25,7 @@ class ViewApplication extends F\ViewPage
         $output .= "<div class=\"{CONTAINER}\">\n";
         $output .= $this->getContentFromPageFile($this->pageFile);
         $output .= "</div>\n";
+        $output .= $this->getContentFromPageFile("viewFooter.php");
         $output .= "</body>\n";
         return $output;
     }
