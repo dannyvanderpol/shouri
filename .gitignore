@@ -3,3 +3,6 @@
 
 # Test reports
 /unit_tests/test_reports/*
+
+# Generated color theme
+/application/styles/color-theme.css
