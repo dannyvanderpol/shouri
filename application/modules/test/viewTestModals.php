@@ -16,7 +16,7 @@
 
 // Setup the modal message
 document.getElementById('modal-message-title').innerHTML = "Modal message test";
-document.getElementById('modal-message-body').innerHTML = "If all work file a message dialog will be shown.";
+document.getElementById('modal-message-body').innerHTML = "If all works fine a message dialog will be shown.";
 
 
 function reloadPage()
@@ -37,7 +37,7 @@ function closeLoader(loader)
 
 function showMessage()
 {
-    showModalMessage("Modal message test", "If all work file a message dialog will be shown.");
+    showModalMessage("Modal message test", "If all works fine a message dialog will be shown.");
 }
 
 function showConfirm()
