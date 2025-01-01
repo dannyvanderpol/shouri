@@ -6,6 +6,14 @@ class ControllerApplication extends F\ControllerBase
 {
     private $log;
 
+    public function __construct()
+    {
+        $this->log = new F\ModelLogger("application");
+        $this->log->writeMessage("------------------------------ Application start ------------------------------");
+
+        date_default_timezone_set("Europe/Amsterdam");
+    }
+
     public function executeAction($action, $level, $parameters)
     {
         // $level = access level:
@@ -14,8 +22,6 @@ class ControllerApplication extends F\ControllerBase
         // 2 - configuration must be OK and must be logged in
 
         $controllerName = get_class($this);
-        $this->log = new F\ModelLogger("application");
-        $this->log->writeMessage("------------------------------ Application start ------------------------------");
         $this->log->writeMessage("Controller: '{$controllerName}'");
         $this->log->writeMessage("Action    : '{$action}'");
         $this->log->writeMessage("Level     : {$level}");

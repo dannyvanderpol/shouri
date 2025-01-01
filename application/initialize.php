@@ -10,5 +10,3 @@ define("STYLES_PATH",       "application/styles/");
 define("SEARCH_PATHS", [
     "application/modules"
 ]);
-
-date_default_timezone_set("Europe/Amsterdam");
