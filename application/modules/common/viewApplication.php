@@ -16,12 +16,12 @@ class ViewApplication extends F\ViewPage
         $this->pageTitle = PAGE_TITLE . $subTitle;
         $this->pageFile = "view{$pageName}.php";
         $this->styleSheets = [
-            "application/styles/bootstrap.css",
+            "application/styles/bootstrap.min.css",
             "application/styles/shouri.css",
             "application/styles/color-theme.css"
         ];
         $this->javaScriptFiles = [
-            "application/js/bootstrap.bundle.js",
+            "application/js/bootstrap.bundle.min.js",
         ];
     }
 
