@@ -11,7 +11,8 @@ class ControllerApplication extends F\ControllerBase
         $this->log = new F\ModelLogger("application");
         $this->log->writeMessage("------------------------------ Application start ------------------------------");
 
-        date_default_timezone_set("Europe/Amsterdam");
+        // TODO: read from database setting table
+        date_default_timezone_set(DEFAULT_TIME_ZONE);
     }
 
     public function executeAction($action, $level, $parameters)
