@@ -6,8 +6,8 @@ class ViewApplication extends F\ViewPage
 {
     public function __construct($pageName, $pageData)
     {
-        $subTitle = F\arrayGet($pageData, "sub_title", "");
-        if ($subTitle != "")
+        $subTitle = F\arrayGet($pageData, "sub_title");
+        if ($subTitle != null)
         {
             $subTitle = " - {$subTitle}";
         }
