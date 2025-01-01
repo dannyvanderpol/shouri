@@ -22,6 +22,7 @@ class ViewApplication extends F\ViewPage
         ];
         $this->javaScriptFiles = [
             "application/js/bootstrap.bundle.min.js",
+            "application/js/modal.js"
         ];
     }
 
