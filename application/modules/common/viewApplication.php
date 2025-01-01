@@ -20,12 +20,16 @@ class ViewApplication extends F\ViewPage
             "application/styles/shouri.css",
             "application/styles/color-theme.css"
         ];
+        $this->javaScriptFiles = [
+            "application/js/bootstrap.bundle.js",
+        ];
     }
 
     public function generateBody()
     {
         $output = "<body>\n";
         $output .= $this->getContentFromPageFile("viewHeader.php");
+        $output .= $this->getContentFromPageFile("viewModal.php");
         $output .= "<div class=\"{CONTAINER} main-content\">\n";
         $output .= $this->getContentFromPageFile($this->pageFile);
         $output .= "</div>\n";
