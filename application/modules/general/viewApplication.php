@@ -6,7 +6,11 @@ class ViewApplication extends F\ViewPage
 {
     public function __construct($pageName, $pageData)
     {
-        $subTitle = (isset($pageData["sub_title"]) ? " - " . $pageData["sub_title"] : "");
+        $subTitle = F\arrayGet($pageData, "sub_title", "");
+        if ($subTitle != "")
+        {
+            $subTitle = " - {$subTitle}";
+        }
 
         $this->pageData = $pageData;
         $this->pageTitle = PAGE_TITLE . $subTitle;
