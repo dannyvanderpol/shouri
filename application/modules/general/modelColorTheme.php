@@ -5,7 +5,7 @@ class ModelColorTheme
 
     public static function generateTheme()
     {
-        // Later we read it from the database setting table
+        // TODO: read from the database setting table
         $color = DEFAULT_COLOR;
 
         // Generate colors
