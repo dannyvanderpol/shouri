@@ -8,6 +8,9 @@ define("ROUTES",
     // Landing page (website root)
     ["",                "ControllerApplication",    "showLandingPage",      1],
 
+    // All API calls go here
+    ["api",             "ControllerApplication",    "processApiCall",       0],
+
     // Configuration
     ["configuration",   "ControllerConfiguration",  "showConfiguration",    0],
 

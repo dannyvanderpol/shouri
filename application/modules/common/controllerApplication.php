@@ -45,6 +45,10 @@ class ControllerApplication extends F\ControllerBase
         }
 
         $this->log->writeMessage("Execute action");
+        if ($action == "processApiCall")
+        {
+            return ModelApi::processApiCall($isConfigurationOk, $isSessionValid);
+        }
         return $this->$action($parameters);
     }
 
