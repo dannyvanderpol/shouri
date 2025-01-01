@@ -47,15 +47,7 @@ class ControllerApplication extends F\ControllerBase
         return $this->$action($parameters);
     }
 
-    protected function showWrongUri()
-    {
-        $pageData = [
-            "sub_title" => "Wrong URI"
-        ];
-        return $this->showPage("WrongUri", $pageData);
-    }
-
-    private function showPage($pageName, $pageData)
+    public function showPage($pageName, $pageData)
     {
         $this->log->writeMessage("Generate color theme");
         ModelColorTheme::generateTheme();
@@ -63,5 +55,13 @@ class ControllerApplication extends F\ControllerBase
         $view = new ViewApplication($pageName, $pageData);
         $this->log->writeMessage("Generate view");
         return $view->generateOutput();
+    }
+
+    protected function showWrongUri()
+    {
+        $pageData = [
+            "sub_title" => "Wrong URI"
+        ];
+        return $this->showPage("WrongUri", $pageData);
     }
 }
