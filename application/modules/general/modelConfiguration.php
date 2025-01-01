@@ -1,4 +1,4 @@
-<?php
+<?php use framework as F;
 
 /* Model for handling the configuration */
 
@@ -15,6 +15,21 @@ class ModelConfiguration
         "ssl_domain"    => ""
     ];
 
+
+    public static function checkConfiguration($silent=false)
+    {
+        $log = new F\ModelLogger("application");
+        // Check for configuration file
+        if (!file_exists(self::configFile))
+        {
+            if (!$silent)
+            {
+                $log->writeMessage("The configuration file does not exist (". self::configFile . ")");
+            }
+            return false;
+        }
+        return true;
+    }
 
     public static function writeConfigurationFile($configData)
     {

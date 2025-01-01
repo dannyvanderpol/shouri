@@ -6,6 +6,7 @@ class ControllerApplication extends F\ControllerBase
 {
     private $log;
 
+
     public function __construct()
     {
         $this->log = new F\ModelLogger("application");
@@ -28,6 +29,19 @@ class ControllerApplication extends F\ControllerBase
         $this->log->writeMessage("Level     : {$level}");
         $this->log->writeMessage("Parameters:");
         $this->log->writeDataArray($parameters);
+
+        $isConfigurationOk = ModelConfiguration::checkConfiguration();
+        $isSessionValid = false;
+
+        $this->log->writeMessage("Configuration OK: " . var_export($isConfigurationOk, true));
+        $this->log->writeMessage("Valid session   : " . var_export($isSessionValid, true));
+
+        // Check the setup, only for level 1 or higher
+        if (!$isConfigurationOk and $level >= 1) {
+            $this->log->writeMessage("Redirect to: setup/create-config");
+            $this->gotoLocation("configuration");
+            exit();
+        }
 
         $this->log->writeMessage("Execute action");
         return $this->$action($parameters);
