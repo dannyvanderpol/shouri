@@ -6,3 +6,6 @@
 
 # Generated color theme
 /application/styles/color-theme.css
+
+# Configuration
+/config/*.php

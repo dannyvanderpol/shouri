@@ -37,7 +37,7 @@ class ModelColorTheme
         $output .= ".loader             {border-top-color:{$color}!important}\n";
 
         // Write to file
-        file_put_contents(ABS_PATH . STYLES_PATH . "color-theme.css", $output);
+        file_put_contents(ABS_PATH . STYLES_FOLDER . "color-theme.css", $output);
     }
 
     public static function getThemeColors($color)

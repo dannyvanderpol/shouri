@@ -1,0 +1,2 @@
+# This folder contains all config file and should not be accessible from the out side world
+Deny from all
