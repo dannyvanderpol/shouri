@@ -4,16 +4,17 @@
 
 class ControllerApplication extends F\ControllerBase
 {
-    private $log;
+    protected $log;
 
 
     public function __construct()
     {
+        // TODO: read from database setting table
+        // TODO: time zone must be set before starting the framework, else the framework log shows the wrong time
+        date_default_timezone_set(DEFAULT_TIME_ZONE);
+
         $this->log = new F\ModelLogger("application");
         $this->log->writeMessage("------------------------------ Application start ------------------------------");
-
-        // TODO: read from database setting table
-        date_default_timezone_set(DEFAULT_TIME_ZONE);
     }
 
     public function executeAction($action, $level, $parameters)
