@@ -4,6 +4,8 @@
 
 class ControllerApplication extends F\ControllerBase
 {
+    private $log;
+
     public function executeAction($action, $level, $parameters)
     {
         // $level = access level:
@@ -12,15 +14,15 @@ class ControllerApplication extends F\ControllerBase
         // 2 - configuration must be OK and must be logged in
 
         $controllerName = get_class($this);
-        define("APP_LOG", new F\ModelLogger("application"));
-        APP_LOG->writeMessage("------------------------------ Application start ------------------------------");
-        APP_LOG->writeMessage("Controller: '{$controllerName}'");
-        APP_LOG->writeMessage("Action    : '{$action}'");
-        APP_LOG->writeMessage("Level     : {$level}");
-        APP_LOG->writeMessage("Parameters:");
-        APP_LOG->writeDataArray($parameters);
+        $this->log = new F\ModelLogger("application");
+        $this->log->writeMessage("------------------------------ Application start ------------------------------");
+        $this->log->writeMessage("Controller: '{$controllerName}'");
+        $this->log->writeMessage("Action    : '{$action}'");
+        $this->log->writeMessage("Level     : {$level}");
+        $this->log->writeMessage("Parameters:");
+        $this->log->writeDataArray($parameters);
 
-        APP_LOG->writeMessage("Execute action");
+        $this->log->writeMessage("Execute action");
         return $this->$action($parameters);
     }
 
@@ -34,11 +36,11 @@ class ControllerApplication extends F\ControllerBase
 
     private function showPage($pageName, $pageData)
     {
-        APP_LOG->writeMessage("Generate color theme");
+        $this->log->writeMessage("Generate color theme");
         ModelColorTheme::generateTheme();
-        APP_LOG->writeMessage("Create view for '{$pageName}'");
+        $this->log->writeMessage("Create view for '{$pageName}'");
         $view = new ViewApplication($pageName, $pageData);
-        APP_LOG->writeMessage("Generate view");
+        $this->log->writeMessage("Generate view");
         return $view->generateOutput();
     }
 }
