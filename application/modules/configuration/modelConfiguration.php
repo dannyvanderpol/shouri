@@ -28,6 +28,26 @@ class ModelConfiguration
             }
             return false;
         }
+        $user = new ModelDatabaseTableUser();
+        $error = $user->getLastError();
+        if ($error != "")
+        {
+            if (!$silent)
+            {
+                $log->writeMessage("Could not connect to the database:");
+                $log->writeMessage($error);
+            }
+            return false;
+        }
+        $records = $user->getRecords("is_admin = 1 AND is_active = 1");
+        if (count($records) == 0)
+        {
+            if (!$silent)
+            {
+                $log->writeMessage("No active admin users in the user table");
+            }
+            return false;
+        }
         return true;
     }
 
@@ -69,14 +89,26 @@ class ModelConfiguration
         $configdata["database"] = $data["database"];
         $configdata["username"] = $data["db_user_name"];
         $configdata["password"] = $data["db_password"];
-        $result["result"] = self::writeConfigurationFile($configdata);
-        if (!$result["result"])
+        if (!self::writeConfigurationFile($configdata))
         {
             $result["message"] = "The configuration file '" . self::configFile ."' could not be created.";
             return $result;
         }
         // Create user in the database
-        $result = ["result" => false, "message" => "Failed to add the administrator user to the database."];
+        $database = new ModelDatabase();
+        $error = $database->getLastError();
+        if ($error != "")
+        {
+            $result["message"] = "Could not connect to the database:\n{$error}";
+            return $result;
+        }
+        if ($database->tableExist("user"))
+        {
+            if (!$database->dropTable("user"))
+            {
+                $result["message"] = "Could not drop the user table:\n" . $database->getLastError();
+            }
+        }
         $user = new ModelDatabaseTableUser();
         $error = $user->getLastError();
         if ($error != "")
