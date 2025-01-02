@@ -57,9 +57,22 @@ class Database:
     def get_table_columns(cls, table_name):
         return list(map(lambda x: x["Field"], cls._execute_query(f"SHOW COLUMNS FROM {table_name}")))
 
+    @classmethod
+    def get_records_from_table(cls, table):
+        return cls._execute_query(f"SELECT * FROM {table}")
+
+    @classmethod
+    def truncate_table(cls, table):
+        cls._execute_query(f"TRUNCATE TABLE {table}")
+
 
 if __name__ == "__main__":
 
     Database.clear_all()
     Database.create_default_user()
     print(Database.get_table_columns("user"))
+    print(Database.get_records_from_table("user"))
+    Database.truncate_table("user")
+    print(Database.get_records_from_table("user"))
+    Database.create_default_user()
+    print(Database.get_records_from_table("user"))
