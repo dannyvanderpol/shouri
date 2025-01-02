@@ -44,16 +44,45 @@ class ControllerApplication extends F\ControllerBase
             exit();
         }
 
-        $this->log->writeMessage("Execute action");
         if ($action == "processApiCall")
         {
-            return ModelApi::processApiCall($isConfigurationOk, $isSessionValid);
+            $this->log->writeMessage("Process API call (see API log for details)");
+            $result = ModelApi::processApiCall($isConfigurationOk, $isSessionValid);
+            // API call can result in a redirect, if the API call is made from a webpage
+            $redirect = F\arrayGet($result, "redirect");
+            if ($redirect !== null)
+            {
+                $this->log->writeMessage("API call results in redirect to '{$redirect}'");
+                $this->setNextPageData($result);
+                $this->gotoLocation($redirect);
+                exit();
+            }
+            // No redirect, return API result as JSON format
+            return json_encode($result, JSON_PRETTY_PRINT);
         }
+        $this->log->writeMessage("Execute action");
         return $this->$action($parameters);
     }
 
-    public function showPage($pageName, $pageData)
+    protected function showPage($pageName, $pageData)
     {
+        $this->log->writeMessage("Show page: '{$pageName}'");
+        $this->log->writeMessage("Merge page data");
+        $nextPageData = ModelApplicationSession::getData("next_page_data", []);
+        ModelApplicationSession::clearData("next_page_data");
+        // Merge page data without record
+        $recordData = F\arrayGet($nextPageData, "record", []);
+        unset($nextPageData["record"]);
+        $pageData = array_merge($pageData, $nextPageData);
+        // Merge record data, or add record data
+        if (isset($pageData["record"]) and count($recordData) > 0)
+        {
+            $pageData["record"] = array_merge($pageData["record"], $recordData);
+        }
+        elseif (count($recordData) > 0)
+        {
+            $pageData["record"] = $recordData;
+        }
         $this->log->writeMessage("Generate color theme");
         ModelColorTheme::generateTheme();
         $this->log->writeMessage("Create view for '{$pageName}'");
@@ -68,5 +97,11 @@ class ControllerApplication extends F\ControllerBase
             "sub_title" => "Wrong URI"
         ];
         return $this->showPage("WrongUri", $pageData);
+    }
+
+    protected function setNextPageData($pageData)
+    {
+        // Prepare next page data in case of a redirect
+        ModelApplicationSession::setData("next_page_data", $pageData);
     }
 }
