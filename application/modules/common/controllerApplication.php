@@ -15,8 +15,6 @@ class ControllerApplication extends F\ControllerBase
 
         $this->log = new F\ModelLogger("application");
         $this->log->writeMessage("------------------------------ Application start ------------------------------");
-        $this->log->writeMessage("Read configuration data");
-        define("CONFIG_DATA", ModelConfiguration::readConfigurationFile());
     }
 
     public function executeAction($action, $level, $parameters)

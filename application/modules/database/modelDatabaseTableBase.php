@@ -12,10 +12,13 @@ class ModelDatabaseTableBase extends F\ModelDatabaseTable
 
         $this->log = new F\ModelLogger("database");
 
-        $this->database = F\arrayGet(CONFIG_DATA, "database");
-        $host = F\arrayGet(CONFIG_DATA, "server");
-        $user = F\arrayGet(CONFIG_DATA, "username");
-        $password = F\arrayGet(CONFIG_DATA, "password");
+        $this->log->writeMessage("Read configuration data");
+        $configData = ModelConfiguration::readConfigurationFile();
+
+        $this->database = F\arrayGet($configData, "database");
+        $host = F\arrayGet($configData, "server");
+        $user = F\arrayGet($configData, "username");
+        $password = F\arrayGet($configData, "password");
 
         parent::__construct($host, $user, $password);
 
