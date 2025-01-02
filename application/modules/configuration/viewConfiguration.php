@@ -1,24 +1,22 @@
-<?php
+<?php use framework as F;
 
-$pageData = $this->pageData;
-
-$hostName = isset($pageData["record"]["host_name"]) ? $pageData["record"]["host_name"] : "";
-$database = isset($pageData["record"]["database"]) ? $pageData["record"]["database"] : "";
-$dbUserName = isset($pageData["record"]["db_user_name"]) ? $pageData["record"]["db_user_name"] : "";
-$adminEmail = isset($pageData["record"]["admin_email"]) ? $pageData["record"]["admin_email"] : "";
-$adminName = isset($pageData["record"]["admin_name"]) ? $pageData["record"]["admin_name"] : "";
+$record = F\arrayGet($this->pageData, "record", []);
+$hostName = F\arrayGet($record, "host_name", "");
+$database = F\arrayGet($record, "database", "");
+$dbUserName = F\arrayGet($record, "db_user_name", "");
+$adminEmail = F\arrayGet($record, "admin_email", "");
+$adminName = F\arrayGet($record, "admin_name", "");
 
 ?>
 <h3>Configuration</h3>
 <p>It appears there is no configuration present in the system.</p>
 <p>Before you can create a configuration, you need to have a database setup first.</p>
-<p>Log in to the MySQL database manager and create a database.</p>
-<p>You can also use an existing database, but it must be empty. All tables must be removed ('dropped').</p>
-<p>Also create a MySQL user for accessing the database with all privileges enabled.</p>
+<p>Log in to the MySQL database manager and create a new empty database. Tables will be automatically created.</p>
+<p>Create a MySQL user for accessing the database with full access to the database (all privileges enabled).</p>
 <p>When ready, fill out the following form and the configuration will be created for you.</p>
 <form action="{LINK_ROOT}api" method="post">
-<input type="hidden" name="on_success" value="" />
-<input type="hidden" name="on_failure" value="setup/create-config" />
+<input type="hidden" name="on_save" value="" />
+<input type="hidden" name="on_failure" value="{REQUEST_URI}" />
 <input type="hidden" name="title" value="Create configuration" />
 <table>
 <tr><td>Host name:</td><td><input name="record[host_name]" class="{INPUT}" type="text" value="<?php echo $hostName; ?>" /></td></tr>
