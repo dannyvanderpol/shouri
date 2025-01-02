@@ -29,6 +29,14 @@ class TestWebAccess(TestSuiteBase):
         # Style sheets and fonts
         if file_path.startswith("application/styles/") and file_path.endswith(".css"):
             expected_code = 200
+        if file_path.startswith("application/styles/") and file_path.endswith(".css.map"):
+            expected_code = 200
+
+        # JavaScript
+        if file_path.startswith("application/js/") and file_path.endswith(".js"):
+            expected_code = 200
+        if file_path.startswith("application/js/") and file_path.endswith(".js.map"):
+            expected_code = 200
 
         self.log.debug(f"Check access for file: {file_path}")
         r = self.http_request.do_get(file_path)
