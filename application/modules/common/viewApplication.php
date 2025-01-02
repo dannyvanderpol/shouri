@@ -30,12 +30,29 @@ class ViewApplication extends F\ViewPage
     {
         $output = "<body>\n";
         $output .= $this->getContentFromPageFile("viewHeader.php");
-        $output .= $this->getContentFromPageFile("viewModal.php");
+        $output .= $this->getContentFromPageFile("viewMenu.php");
         $output .= "<div class=\"{CONTAINER} main-content\">\n";
         $output .= $this->getContentFromPageFile($this->pageFile);
         $output .= "</div>\n";
         $output .= $this->getContentFromPageFile("viewFooter.php");
+        $output .= $this->getContentFromPageFile("viewModal.php");
+        $output .= $this->insertShowModal();
         $output .= "</body>\n";
+        return $output;
+    }
+
+    private function insertShowModal()
+    {
+        $output = "";
+        $result = F\arrayGet($this->pageData, "result");
+        $message = F\arrayGet($this->pageData, "message", "");
+        $title = F\arrayGet($this->pageData, "title", "Server message");
+        if ($result === false or ($result === true && $message != ""))
+        {
+            $message = htmlspecialchars($message, ENT_QUOTES);
+            $message = str_replace("\n", "<br />", $message);
+            $output = "<script>showModalMessage('$title', '$message');</script>\n";
+        }
         return $output;
     }
 }
