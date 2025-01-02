@@ -49,8 +49,12 @@ class ModelApi
         switch (true)
         {
             case ($action == "create_configuration"):
-                self::$log->writeMessage("Create configuration");
-                $result = ModelConfiguration::createConfiguration($record);
+                $result = ["result" => false, "message" => "There is already a configuration."];
+                if (!$isConfigurationOk)
+                {
+                    self::$log->writeMessage("Create configuration");
+                    $result = ModelConfiguration::createConfiguration($record);
+                }
                 break;
         }
 
