@@ -93,6 +93,12 @@ class ControllerApplication extends F\ControllerBase
         return $view->generateOutput();
     }
 
+    protected function showLandingPage()
+    {
+        // TODO: get the landing page from the database setting table and navigate to it
+        return $this->showWrongUri();
+    }
+
     protected function showWrongUri()
     {
         $pageData = [
