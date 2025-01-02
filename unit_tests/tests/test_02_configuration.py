@@ -53,7 +53,6 @@ class TestConfiguration(TestSuiteBase):
         Database.truncate_table("user")
         result = create_configuration()
         self.fail_if(not result["result"], f"Could not create configuration: {result["message"]}")
-        print(result)
 
 
 if __name__ == "__main__":
