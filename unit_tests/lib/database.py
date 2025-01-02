@@ -35,11 +35,13 @@ class Database:
     @classmethod
     def clear_all(cls, drop_user=False):
         # Delete all tables and start with an empty database
-        for table in cls._execute_query("SHOW TABLES"):
+        # Make a flat list of all table names
+        tables = sum(map(lambda x: list(x.values()), cls._execute_query("SHOW TABLES")), [])
+        for table in tables:
             query = "DROP "
-            if not drop_user and table["Tables_in_lily_erp_test"] == "user":
+            if not drop_user and table == "user":
                 query = "TRUNCATE "
-            query += f"TABLE {table["Tables_in_lily_erp_test"]}"
+            query += f"TABLE {table}"
             cls._execute_query(query)
         cls._connection.commit()
 
