@@ -8,7 +8,7 @@ import os
 class TestSettings:
 
     root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
-    ini_filename = os.path.abspath(os.path.join(root_path, "../../shouri.ini"))
+    config_filename = os.path.abspath(os.path.join(root_path, "config", "config.php"))
     uri = "http://localhost:8080/shouri/"
 
     # These credentials are only used for testing, make sure these are not used in live production servers
@@ -26,4 +26,4 @@ if __name__ == "__main__":
 
     print(TestSettings.root_path)
     print(TestSettings.uri)
-    print(TestSettings.ini_filename)
+    print(TestSettings.config_filename)
