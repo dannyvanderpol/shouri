@@ -1,0 +1,2 @@
+# Prevent loading in the browser
+Deny from all
