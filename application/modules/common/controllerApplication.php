@@ -31,7 +31,6 @@ class ControllerApplication extends F\ControllerBase
 
         $isConfigurationOk = ModelConfiguration::checkConfiguration();
         $isSessionValid = ModelApplicationSession::checkSession();
-
         $this->log->writeMessage("Configuration OK: " . var_export($isConfigurationOk, true));
         $this->log->writeMessage("Valid session   : " . var_export($isSessionValid, true));
 
@@ -42,7 +41,7 @@ class ControllerApplication extends F\ControllerBase
         }
 
         // Do not show configuration page if the configuration is created
-        if ($isConfigurationOk and $action == "showConfiguration")
+        if ($isConfigurationOk and $controllerName == "ControllerConfiguration")
         {
             $this->log->writeMessage("Configuration already created, redirect to root");
             $this->gotoLocation("");
