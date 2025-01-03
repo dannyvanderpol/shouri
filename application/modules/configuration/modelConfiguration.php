@@ -39,7 +39,7 @@ class ModelConfiguration
             }
             return false;
         }
-        $records = $user->getRecords("is_admin = 1 AND is_active = 1");
+        $records = $user->getRecords(["filter" => "is_admin = 1 AND is_active = 1"]);
         if (count($records) == 0)
         {
             if (!$silent)
