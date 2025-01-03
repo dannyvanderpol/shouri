@@ -12,7 +12,6 @@ class ModelDatabaseTableBase extends F\ModelDatabaseTable
 
         $this->log = new F\ModelLogger("database");
 
-        $this->log->writeMessage("Read configuration data");
         $configData = ModelConfiguration::readConfigurationFile();
 
         $this->database = F\arrayGet($configData, "database");
