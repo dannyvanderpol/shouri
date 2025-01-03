@@ -30,7 +30,7 @@ class ControllerApplication extends F\ControllerBase
         $this->log->writeDataArray($parameters);
 
         $isConfigurationOk = ModelConfiguration::checkConfiguration();
-        $isSessionValid = false;
+        $isSessionValid = ModelApplicationSession::checkSession();
 
         $this->log->writeMessage("Configuration OK: " . var_export($isConfigurationOk, true));
         $this->log->writeMessage("Valid session   : " . var_export($isSessionValid, true));
