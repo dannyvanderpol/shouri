@@ -29,13 +29,12 @@ class ModelConfiguration
             return false;
         }
         $user = new ModelDatabaseTableUser();
-        $error = $user->getLastError();
-        if ($error != "")
+        if (!$user->isConnected())
         {
             if (!$silent)
             {
                 $log->writeMessage("Could not connect to the database:");
-                $log->writeMessage($error);
+                $log->writeMessage($user->getLastError());
             }
             return false;
         }
@@ -96,10 +95,9 @@ class ModelConfiguration
         }
         // Create user in the database
         $database = new ModelDatabase();
-        $error = $database->getLastError();
-        if ($error != "")
+        if (!$database->isConnected())
         {
-            $result["message"] = "Could not connect to the database:\n{$error}";
+            $result["message"] = "Could not connect to the database:\n" . $database->getLastError();
             return $result;
         }
         if ($database->tableExist("user"))
@@ -110,10 +108,9 @@ class ModelConfiguration
             }
         }
         $user = new ModelDatabaseTableUser();
-        $error = $user->getLastError();
-        if ($error != "")
+        if (!$user->isConnected())
         {
-            $result["message"] = "Could not connect to the database:\n{$error}";
+            $result["message"] = "Could not connect to the database:\n" . $user->getLastError();
             return $result;
         }
         $record = [

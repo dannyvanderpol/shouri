@@ -21,15 +21,14 @@ class ModelDatabaseTableBase extends F\ModelDatabaseTable
 
         parent::__construct($host, $user, $password);
 
-        $error = $this->getLastError();
-        if ($error != "")
+        if (!$this->isConnected())
         {
             $this->log->writeMessage("Error connecting:");
             $this->log->writeMessage("Host    : " . var_export($host, true));
             $this->log->writeMessage("User    : " . var_export($user, true));
             $this->log->writeMessage("Database: " . var_export($this->database, true));
             $this->log->writeMessage("Table   : " . var_export($this->table, true));
-            $this->log->writeMessage($error);
+            $this->log->writeMessage($this->getLastError());
         }
     }
 }
