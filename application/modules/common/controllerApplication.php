@@ -39,7 +39,6 @@ class ControllerApplication extends F\ControllerBase
         if (!$isConfigurationOk and $level >= 1) {
             $this->log->writeMessage("Redirect to: configuration");
             $this->gotoLocation("configuration");
-            exit();
         }
 
         // Do not show configuration page if the configuration is created
@@ -47,7 +46,6 @@ class ControllerApplication extends F\ControllerBase
         {
             $this->log->writeMessage("Configuration already created, redirect to root");
             $this->gotoLocation("");
-            exit();
         }
 
         if ($action == "processApiCall")
@@ -61,7 +59,6 @@ class ControllerApplication extends F\ControllerBase
                 $this->log->writeMessage("API call results in redirect to '{$redirect}'");
                 $this->setNextPageData($result);
                 $this->gotoLocation($redirect);
-                exit();
             }
             // No redirect, return API result as JSON format
             return json_encode($result, JSON_PRETTY_PRINT);
@@ -99,8 +96,7 @@ class ControllerApplication extends F\ControllerBase
 
     protected function showLandingPage()
     {
-        // TODO: get the landing page from the database setting table and navigate to it
-        return $this->showWrongUri();
+        $this->gotoLocation(ModelSettings::getSetting("landing_page", DEFAULT_LANDING_PAGE));
     }
 
     protected function showWrongUri()
