@@ -7,14 +7,20 @@ td, th          {padding: 4px 8px; vertical-align: middle}
 /* Containers */
 .main-content   {min-height: 700px}
 .form-buttons   {margin-top: 32px}
+.dashboard-item {width: 300px; height: 160px}
 
 /* Logo */
 .logo-img       {max-height: 36px; vertical-align: middle}
 .logo-text      {font-size: 24px; vertical-align: middle}
 
 /* Animated loader */
-
 .loader         {position: absolute; left: 50%; width: 100px; height: 100px; margin: -50px 0 0 -50px;
                  border: 12px solid #eee; border-top: 12px solid #000; border-radius: 50%;
                  animation: spin 2s linear infinite}
 @keyframes spin {0% {transform: rotate(0deg)} 100% {transform: rotate(360deg)}}
+
+/* Links */
+a.no-link-color:link    {color: inherit !important}
+a.no-link-color:visited {color: inherit !important}
+a.no-link-color:hover   {color: inherit !important}
+a.no-link-color:active  {color: inherit !important}
