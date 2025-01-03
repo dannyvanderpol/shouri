@@ -97,6 +97,12 @@ class ControllerApplication extends F\ControllerBase
         {
             $pageData["record"] = $recordData;
         }
+        // Set logged in state
+        $pageData["is_logged_in"] = false;
+        if (ModelConfiguration::checkConfiguration(true))
+        {
+            $pageData["is_logged_in"] = ModelApplicationSession::checkSession();
+        }
         $this->log->writeMessage("Generate color theme");
         ModelColorTheme::generateTheme();
         $this->log->writeMessage("Create view for '{$pageName}'");

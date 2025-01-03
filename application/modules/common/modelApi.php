@@ -37,7 +37,7 @@ class ModelApi
             return self::processResult($result, $onSuccess, $onFailure, $record, $title);
         }
 
-        // If the session is not OK and we are not trying to create a cfiguration, log in or log out
+        // If the session is not OK and we are not trying to create a configuration, log in or log out
         if (!$isSessionValid and $action != "create_configuration" and $action != "log_in" and $action != "log_out")
         {
             $result["message"] = "Unauthorized";
@@ -60,6 +60,12 @@ class ModelApi
             case ($action == "log_in"):
                 self::$log->writeMessage("Log in");
                 $result = ModelApplicationSession::createSession($record);
+                break;
+
+            case ($action == "log_out"):
+                self::$log->writeMessage("Log out");
+                ModelApplicationSession::destroySession();
+                $result = ["result" => true, "message" => ""];
                 break;
         }
 
