@@ -5,8 +5,7 @@ class ModelColorTheme
 
     public static function generateTheme()
     {
-        // TODO: read from the database setting table
-        $color = DEFAULT_COLOR;
+        $color = ModelSettings::getSetting("theme_color", DEFAULT_COLOR);
 
         // Generate colors
         $result = self::getThemeColors($color);
