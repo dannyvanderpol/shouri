@@ -22,6 +22,10 @@ Access levels can be combined:
 
 class ModelDatabaseTableUser extends ModelDatabaseTableBase
 {
+    public $lockMaxAttempts = 5;
+    public $lockTimeout = 30;
+
+
     public function __construct()
     {
         $this->table = "user";

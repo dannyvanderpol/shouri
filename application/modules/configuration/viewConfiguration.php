@@ -15,7 +15,7 @@ $adminName = F\arrayGet($record, "admin_name", "");
 <p>Create a MySQL user for accessing the database with full access to the database (all privileges enabled).</p>
 <p>When ready, fill out the following form and the configuration will be created for you.</p>
 <form action="{LINK_ROOT}api" method="post">
-<input type="hidden" name="on_save" value="" />
+<input type="hidden" name="on_success" value="" />
 <input type="hidden" name="on_failure" value="{REQUEST_URI}" />
 <input type="hidden" name="title" value="Create configuration" />
 <table>

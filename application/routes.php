@@ -17,6 +17,9 @@ define("ROUTES",
     // Dashboard
     ["dashboard",       "ControllerDashboard",      "showDashboard",        2],
 
+    // Log in
+    ["log-in",          "ControllerSession",        "showLogIn",            1],
+
     // Test URIs, only work when accessed from localhost
     ["test/modals",     "ControllerTest",           "showTestModals",       0]
 ]);

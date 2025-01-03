@@ -18,14 +18,14 @@ class ModelApi
         $postedData = F\getPostedData();
         $action = F\arrayGet($postedData, "action");
         $record =  F\arrayGet($postedData, "record", []);
-        $onSave = F\arrayGet($postedData, "on_save");
+        $onSuccess = F\arrayGet($postedData, "on_success");
         $onDelete = F\arrayGet($postedData, "on_delete");
         $onFailure = F\arrayGet($postedData, "on_failure");
         $title =  F\arrayGet($postedData, "title");
 
         self::$log->writeMessage("Action          : " . var_export($action, true));
         self::$log->writeMessage("Has record data : " . var_export(count($record) > 0, true));
-        self::$log->writeMessage("On save         : " . var_export($onSave, true));
+        self::$log->writeMessage("On success      : " . var_export($onSuccess, true));
         self::$log->writeMessage("On delete       : " . var_export($onDelete, true));
         self::$log->writeMessage("On failure      : " . var_export($onFailure, true));
         self::$log->writeMessage("Title           : " . var_export($title, true));
@@ -56,9 +56,13 @@ class ModelApi
                     $result = ModelConfiguration::createConfiguration($record);
                 }
                 break;
+
+            case ($action == "log_in"):
+                self::$log->writeMessage("Log in");
+                $result = ModelApplicationSession::createSession($record);
+                break;
         }
 
-        $onSuccess = $onSave;
         return self::processResult($result, $onSuccess, $onFailure, $record, $title);
     }
 

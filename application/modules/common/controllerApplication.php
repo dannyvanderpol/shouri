@@ -47,6 +47,18 @@ class ControllerApplication extends F\ControllerBase
             $this->gotoLocation("");
         }
 
+        // Check if page required to be logged in
+        if (!$isSessionValid and $level >= 2)
+        {
+            $this->log->writeMessage("Redirect to: 'log-in' from '" . REQUEST_URI . "'");
+            $requestUri = trim(REQUEST_URI, "/");
+            if ($requestUri != "")
+            {
+                $requestUri = "?redirect={$requestUri}";
+            }
+            $this->gotoLocation("log-in{$requestUri}");
+        }
+
         if ($action == "processApiCall")
         {
             $this->log->writeMessage("Process API call (see API log for details)");

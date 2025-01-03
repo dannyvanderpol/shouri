@@ -8,6 +8,7 @@ td, th          {padding: 4px 8px; vertical-align: middle}
 .main-content   {min-height: 700px}
 .form-buttons   {margin-top: 32px}
 .dashboard-item {width: 300px; height: 160px}
+.log-in-form    {max-width: 400px}
 
 /* Logo */
 .logo-img       {max-height: 36px; vertical-align: middle}
