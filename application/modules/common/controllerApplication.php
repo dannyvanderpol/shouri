@@ -39,8 +39,16 @@ class ControllerApplication extends F\ControllerBase
 
         // Check the setup, only for level 1 or higher
         if (!$isConfigurationOk and $level >= 1) {
-            $this->log->writeMessage("Redirect to: setup/create-config");
+            $this->log->writeMessage("Redirect to: configuration");
             $this->gotoLocation("configuration");
+            exit();
+        }
+
+        // Do not show configuration page if the configuration is created
+        if ($isConfigurationOk and $action == "showConfiguration")
+        {
+            $this->log->writeMessage("Configuration already created, redirect to root");
+            $this->gotoLocation("");
             exit();
         }
 

@@ -35,7 +35,6 @@ class TestConfiguration(TestSuiteBase):
         self.fail_if(" - Configuration" in web_page.page_title,
                      f"Configuration not created, invalid web page: {web_page.page_title}")
 
-
     def test_create_again(self):
         # Create configuration while there is already a configuration
         result = create_configuration()
@@ -54,6 +53,15 @@ class TestConfiguration(TestSuiteBase):
         result = create_configuration()
         self.fail_if(not result["result"], f"Could not create configuration: {result["message"]}")
 
+    def test_with_configuration(self):
+        self._clear_database()
+        self._clear_config_file()
+        result = create_configuration()
+        self.fail_if(not result["result"], f"Could not create configuration: {result["message"]}")
+        # With configuration, the configuration page should not be accessible
+        web_page = self.get_web_page("configuration")
+        self.fail_if(" - Configuration" in web_page.page_title,
+                     f"Configuration loaded while a configuration is created")
 
 if __name__ == "__main__":
 
