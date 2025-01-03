@@ -31,4 +31,18 @@ class ModelDatabaseTableBase extends F\ModelDatabaseTable
             $this->log->writeMessage($this->getLastError());
         }
     }
+
+    public function getRecordById($id)
+    {
+        $record = [];
+        if ($id > 0)
+        {
+            $records = $this->getRecords(["filter" => "id = {$id}"]);
+            if (count($records) == 1)
+            {
+                $record = $records[0];
+            }
+        }
+        return $record;
+    }
 }
