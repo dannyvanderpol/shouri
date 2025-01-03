@@ -9,7 +9,6 @@ class ControllerTest extends ControllerApplication
         {
             $this->log->writeMessage("Test URIs only allowed on localhost, redirecting to root");
             $this->gotoLocation("");
-            exit();
         }
         return parent::executeAction($action, $level, $parameters);
     }
