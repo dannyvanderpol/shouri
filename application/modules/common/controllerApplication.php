@@ -9,6 +9,8 @@ class ControllerApplication extends F\ControllerBase
 
     public function __construct()
     {
+        $setting = new ModelDatabaseTableSetting();
+
         // TODO: read from database setting table
         // TODO: time zone must be set before starting the framework, else the framework log shows the wrong time
         date_default_timezone_set(DEFAULT_TIME_ZONE);
