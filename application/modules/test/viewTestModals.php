@@ -14,11 +14,6 @@
 
 'use strict';
 
-// Setup the modal message
-document.getElementById('modal-message-title').innerHTML = "Modal message test";
-document.getElementById('modal-message-body').innerHTML = "If all works fine a message dialog will be shown.";
-
-
 function reloadPage()
 {
    location.reload();
@@ -49,5 +44,12 @@ function confirmCallback()
 {
     setTimeout(showModalMessage, 200, "Modal confirm test result", "You clicked yes!");
 }
+
+window.addEventListener('load', function ()
+{
+    // Setup the modal message
+    document.getElementById('modal-message-title').innerHTML = "Modal message test";
+    document.getElementById('modal-message-body').innerHTML = "If all works fine a message dialog will be shown.";
+});
 
 </script>
