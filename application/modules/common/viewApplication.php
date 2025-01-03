@@ -18,7 +18,10 @@ class ViewApplication extends F\ViewPage
         $this->styleSheets = [
             "application/styles/bootstrap.min.css",
             "application/styles/shouri.css",
-            "application/styles/color-theme.css"
+            "application/styles/color-theme.css",
+            "application/styles/fontawesome/css/fontawesome.min.css",
+            "application/styles/fontawesome/css/brands.min.css",
+            "application/styles/fontawesome/css/solid.min.css"
         ];
         $this->javaScriptFiles = [
             "application/js/bootstrap.bundle.min.js",
